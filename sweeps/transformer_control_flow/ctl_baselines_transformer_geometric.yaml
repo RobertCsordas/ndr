@@ -1,0 +1,57 @@
+program: main.py
+command:
+  - ${env}
+  - python3
+  - ${program}
+  - ${args}
+method: grid
+metric:
+  name: validation/mean_accuracy
+  goal: maximize
+parameters:
+  log:
+    value: wandb
+  profile:
+    value: trafo_scan
+  task:
+    value: ctl_trafo_classifier
+  stop_after:
+    value: 30000
+  transformer.encoder_n_layers:
+    value: 11
+  transformer.variant:
+    value: geometric_transformer
+  transformer.n_heads:
+    value: 4
+  lr:
+    value: 1.5e-4
+  batch_size:
+    value: 512
+  transformer_classifier.result_column:
+    value: last
+  ctl.reversed:
+    values: 
+      - 0
+      - 1
+  dropout:
+    value: 0.1
+  wd:
+    value: 0.0025
+  state_size:
+    value: 128
+  optimizer:
+    value: adamw
+  embedding_init:
+    value: kaiming
+  ctl.n_more_depth_valid:
+    value: 2
+  ctl.n_more_depth:
+    value: 5
+  sweep_id_for_grid_search:
+    distribution: categorical
+    values:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5

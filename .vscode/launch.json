@@ -1,0 +1,187 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+                {
+            "name": "CTL LSTM classifier",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/main.py",
+            "console": "integratedTerminal",
+            "args": ["--name", "ctl_lstm_class_aaa", "--profile", "scan", "--task", "ctl_rnn_classifier", "--log", "tb",
+                     "--keep_alive", "1", "-reset", "1", "-stop_after", "1000000", "-test_interval", "1000",
+                     "--ctl.reversed", "1", "-seq_classifier.rnn", "lstm", "-amp", "0", "-n_layers", "1", "-thinking_steps", "10"]
+        },
+
+        {
+            "name": "CTL LSTM classifier - DNC",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/main.py",
+            "console": "integratedTerminal",
+            "args": ["--name", "ctl_lstm_class_dnc", "--profile", "scan", "--task", "ctl_rnn_classifier", "--log", "tb",
+                     "--keep_alive", "1", "-reset", "1", "-stop_after", "1000000", "-test_interval", "1000",
+                     "--ctl.reversed", "0", "-seq_classifier.rnn", "dnc", "-amp", "0", "-n_layers", "1", "-thinking_steps", "0"]
+        },
+
+        
+
+        {
+            "name": "CTL Trafo - Classifier",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/main.py",
+            "console": "integratedTerminal",
+            "args": ["--name", "ctl_trafo_classifier", "--profile", "trafo_scan", "--task", "ctl_trafo_classifier",
+                    "--log", "tb", "--keep_alive", "1", "-reset", "1", "-stop_after", "1000000",
+                    "--transformer.encoder_n_layers", "8",  "-transformer.variant", "relative_universal",
+                    "-transformer.n_heads", "1", "-lr", "1e-4", "-batch_size", "512", "-test_interval", "1000",
+                  "-amp", "1", "-transformer_classifier.result_column", "last"]
+        },
+
+        {
+            "name": "CTL Geom Trafo - Classifier",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/main.py",
+            "console": "integratedTerminal",
+            "args": ["--name", "ctl_geom_trafo_classifier", "--profile", "trafo_scan", "--task", "ctl_trafo_classifier",
+                    "--log", "tb", "--keep_alive", "1", "-reset", "1", "-stop_after", "1000000",
+                    "--transformer.encoder_n_layers", "8",  "-transformer.variant", "geometric_transformer",
+                    "-transformer.n_heads", "1", "-lr", "1e-4", "-batch_size", "512", "-test_interval", "1000",
+                  "-amp", "1", "-transformer_classifier.result_column", "last"]
+        },
+
+
+
+        {
+            "name": "CTL Trafo - Classifier, tcf residual, REVERSED",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/main.py",
+            "console": "integratedTerminal",
+            "args": ["--name", "tcf_reversed", "--profile", "trafo_scan", "--task", "ctl_trafo_classifier", 
+                     "--log", "tb", "--keep_alive", "1", "-reset", "1", "-stop_after", "1000000",
+                     "--transformer.encoder_n_layers", "12",  "-transformer.variant", "tcf_residual",
+                     "-lr", "0.0002", "-batch_size", "512", "-test_interval", "1000",
+                    "-amp", "1", "-transformer_classifier.result_column", "last", "-state_size", "256",
+                    "--ctl.reversed", "0", "-dropout", "0.5", "-wd", "0.01",
+                    "-length_bucketed_sampling", "0",  "-optimizer", "adamw", "-transformer.n_heads", "1",
+                    "-debug_plot_interval", "1", "-wandb_bug_workaround", "0",
+                    "-ctl.n_more_depth", "5"]
+        },
+
+        {
+            "name": "CTL Trafo - Classifier, tcf geometric, REVERSED",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/main.py",
+            "console": "integratedTerminal",
+            "args": ["--name", "tcf_geom_reversed", "--profile", "trafo_scan", "--task", "ctl_trafo_classifier", 
+                     "--log", "tb", "--keep_alive", "1", "-reset", "1", "-stop_after", "1000000",
+                     "--transformer.encoder_n_layers", "12",  "-transformer.variant", "tcf_geometric",
+                     "-lr", "0.0002", "-batch_size", "512", "-test_interval", "1000",
+                    "-amp", "1", "-transformer_classifier.result_column", "last", "-state_size", "256",
+                    "--ctl.reversed", "0", "-dropout", "0.5", "-wd", "0.01",
+                    "-length_bucketed_sampling", "0",  "-optimizer", "adamw", "-transformer.n_heads", "1",
+                    "-debug_plot_interval", "1", "-wandb_bug_workaround", "0",
+                    "-ctl.n_more_depth", "5"]
+        },
+
+        {
+            "name": "Listops tcf 2",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/main.py",
+            "console": "integratedTerminal",
+            "args": ["--name", "listops_tcf3", "--profile", "listops_trafo", "-amp", "1",
+                     "--log", "tb", "--keep_alive", "1", "-reset", "1", "-stop_after", "1000000",
+                    "-transformer.variant", "tcf_residual", "-test_batch_size", "128",
+                    "-transformer.encoder_n_layers", "10", "-max_length_per_batch", "100", "-state_size", "512",
+                     "-lr", "2e-4", "-batch_size", "512" "-dropout", "0.5", "-wd", "0.001",
+                     "-transformer.n_heads", "4", "-length_bucketed_sampling", "0", "-optimizer", "adamw",
+                    "-test_batch_size", "32", "-test_interval", "1000", "-listops.variant", "big",
+                    "-tcf.scalar_gate", "0", "-max_length_per_batch", "none"]
+        },
+
+        {
+            "name": "Simple aritchmetic tcf",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/main.py",
+            "console": "integratedTerminal",
+            "args": ["--name", "sa_tcf", "--profile", "listops_trafo", "-amp", "1", "-task", "simple_arithmetic_trafo",
+                     "--log", "tb", "--keep_alive", "1", "-reset", "1", "-stop_after", "100000000",
+                    "-transformer.variant", "tcf_residual", "-test_batch_size", "128",
+                    "-transformer.encoder_n_layers", "10", "-max_length_per_batch", "100", "-state_size", "512",
+                     "-lr", "2e-4", "-batch_size", "512" "-dropout", "0.5", "-wd", "0.001",
+                     "-transformer.n_heads", "4", "-length_bucketed_sampling", "0", "-optimizer", "adamw",
+                    "-test_batch_size", "512", "-test_interval", "1000",  "-max_length_per_batch", "none",
+                    "-tcf.scalar_gate", "0"]
+        },
+
+
+       
+        {
+            "name": "CTL Trafo - Classifier, TCF geometric, REVERSED",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/main.py",
+            "console": "integratedTerminal",
+            "args": ["--name", "tcf_geometric_reversed", "--profile", "trafo_scan", "--task", "ctl_trafo_classifier", 
+                     "--log", "tb", "--keep_alive", "1", "-reset", "1", "-stop_after", "1000000",
+                     "--transformer.encoder_n_layers", "10",  "-transformer.variant", "tcf_geometric",
+                     "-lr", "0.0002", "-batch_size", "512", "-test_interval", "1000",
+                    "-amp", "1", "-transformer_classifier.result_column", "last", "-state_size", "256",
+                    "--ctl.reversed", "0", "-dropout", "0.5", "-wd", "0.001",
+                    "-length_bucketed_sampling", "0",  "-optimizer", "adamw", "-transformer.n_heads", "2",
+                    "-debug_plot_interval", "1", "-wandb_bug_workaround", "0",
+                    "-embedding_init", "auto"]
+        },
+
+        {
+            "name": "Simple aritchmetic TCF geometric",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/main.py",
+            "console": "integratedTerminal",
+            "args": ["--name", "sa_tcf_geometric",   "--profile", "listops_trafo", "-amp", "1", "-task", "simple_arithmetic_trafo",
+                     "--log", "tb", "--keep_alive", "1", "-reset", "1", "-stop_after", "100000000",
+                    "-transformer.variant", "tcf_geometric", "-test_batch_size", "128",
+                    "-transformer.encoder_n_layers", "10", "-max_length_per_batch", "100", "-state_size", "512",
+                     "-lr", "2e-4", "-batch_size", "512" "-dropout", "0.5", "-wd", "0.001",
+                     "-transformer.n_heads", "8", "-length_bucketed_sampling", "0", "-optimizer", "adamw",
+                    "-test_batch_size", "512", "-test_interval", "1000",  "-max_length_per_batch", "none",
+                    "-tcf.scalar_gate", "0", "-embedding_init", "auto"]
+        },
+
+       
+        {
+            "name": "Listops geometric",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/main.py",
+            "console": "integratedTerminal",
+            "args": ["--name", "listops_geo", "--profile", "listops_trafo", "-amp", "1",
+                     "--log", "tb", "--keep_alive", "1", "-reset", "1", "-stop_after", "1000000",
+                    "-transformer.variant", "tcf_geometric", "-test_batch_size", "128",
+                    "-transformer.encoder_n_layers", "10", "-max_length_per_batch", "100", "-state_size", "512",
+                     "-lr", "2e-4", "-batch_size", "512" "-dropout", "0.5", "-wd", "0.001",
+                     "-transformer.n_heads", "4", "-length_bucketed_sampling", "0", "-optimizer", "adamw",
+                    "-test_batch_size", "32", "-test_interval", "1000", "-listops.variant", "big",
+                    "-tcf.scalar_gate", "0", "-max_length_per_batch", "none"]
+        },
+
+      
+
+        {
+            "type": "python",
+            "request": "launch",
+            "name": "Debug File",
+            "program": "${file}",
+            "cwd": "${fileDirname}"
+        }
+    ]
+}

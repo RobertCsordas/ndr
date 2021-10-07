@@ -1,0 +1,59 @@
+program: main.py
+command:
+  - ${env}
+  - python3
+  - ${program}
+  - ${args}
+method: grid
+metric:
+  name: validation/valid/accuracy/total
+  goal: maximize
+parameters:
+  log:
+    value: wandb
+  task:
+    value: listops_rnn
+  profile:
+    value: scan
+  listops.variant:
+    value: big
+  seq_classifier.rnn:
+    value: lstm
+  test_batch_size:
+    value: 16
+  n_layers:
+    value: 4
+  lr:
+    value: 0.001
+  state_size:
+    value: 512
+  dropout:
+    value: 0.1
+  wd:
+    value: 0.08
+  batch_size:
+    value: 512
+  optimizer:
+    value: adamw
+  stop_after:
+    value: 200000
+  max_length_per_batch:
+    value: none
+  amp:
+    value: 1
+  wandb_bug_workaround:
+    value: 1
+  grad_clip:
+    value: 1
+  length_bucketed_sampling:
+    value: 1
+  embedding_size:
+    value: none
+  sweep_id_for_grid_search:
+    distribution: categorical
+    values:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5

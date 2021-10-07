@@ -1,0 +1,39 @@
+program: main.py
+command:
+  - ${env}
+  - python3
+  - ${program}
+  - ${args}
+method: grid
+metric:
+  name: validation/mean_accuracy
+  goal: maximize
+parameters:
+  log:
+    value: wandb
+  profile:
+    value: scan
+  task:
+    value: simple_arithmetics_rnn
+  embedding_size:
+    value: 200
+  state_size:
+    value: 200
+  stop_after:
+    value: 200000
+  seq_classifier.rnn:
+    values: 
+      - lstm
+      - dnc
+  n_layers:
+    value: 2
+  simple_arithmetics.n_samples:
+    value: 100000
+  sweep_id_for_grid_search:
+    distribution: categorical
+    values:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5

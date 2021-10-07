@@ -1,0 +1,41 @@
+program: main.py
+command:
+  - ${env}
+  - python3
+  - ${program}
+  - ${args}
+method: grid
+metric:
+  name: validation/mean_accuracy
+  goal: maximize
+parameters:
+  log:
+    value: wandb
+  profile:
+    value: scan
+  task:
+    value: ctl_rnn_classifier
+  stop_after:
+    value: 20000
+  ctl.reversed:
+    values:
+      - 0
+      - 1
+  seq_classifier.rnn:
+    values: 
+      - lstm
+      - dnc
+  n_layers:
+    value: 1
+  ctl.n_more_depth_valid:
+    value: 3
+  ctl.n_more_depth:
+    value: 5
+  sweep_id_for_grid_search:
+    distribution: categorical
+    values:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5

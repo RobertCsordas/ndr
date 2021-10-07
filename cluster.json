@@ -1,0 +1,25 @@
+{
+  "wandb" : {
+    "project": "user/project"
+  },
+
+  "setup": [
+    "pip3 install -U --user torch",
+    "pip3 install -U --user tqdm",
+    "pip3 install -U --user psutil",
+    "pip3 install -U --user matplotlib",
+    "pip3 install -U --user tensorboard",
+    "pip3 install -U --user future",
+    "pip3 install -U --user setproctitle",
+    "pip3 install -U --user wandb",
+    "pip3 install -U --user dataclasses",
+    "pip3 install -U --user ninja",
+    "pip3 install -U --user moviepy"
+  ],
+
+  "sync": {
+    "exclude": [".git*", "save", "wandb", "cache", "paper", "sweeps"]
+  },
+
+  "path": ["~/.local/bin"]
+}

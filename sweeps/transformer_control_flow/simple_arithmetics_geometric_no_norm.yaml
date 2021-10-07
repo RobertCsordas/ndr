@@ -1,0 +1,74 @@
+program: main.py
+command:
+  - ${env}
+  - python3
+  - ${program}
+  - ${args}
+method: grid
+metric:
+  name: validation/valid/accuracy/total
+  goal: maximize
+parameters:
+  log:
+    value: wandb
+  profile:
+    value: listops_trafo
+  transformer.variant:
+    value: tcf_geometric
+  test_batch_size:
+    value: 256
+  transformer.encoder_n_layers:
+    value: 15
+  task:
+    value: simple_arithmetic_trafo
+  lr:
+    value: 1.5e-4
+  state_size:
+    value: 256
+  dropout:
+    value: 0.5
+  wd:
+    value: 0.01
+  transformer.n_heads:
+    value: 4
+  batch_size:
+    value: 512
+  length_bucketed_sampling:
+    value: 1
+  optimizer:
+    value: adamw
+  stop_after:
+    value: 100000
+  max_length_per_batch:
+    value: none
+  amp:
+    value: 1
+  wandb_bug_workaround:
+    value: 1
+  geometric.pos_encoding:
+    value: direction
+  transformer.attention_dropout:
+    value: 0.1
+  tcf.scalar_gate:
+    value: 0
+  tcf.drop_gate:
+    value: 0.1
+  transformer.ff_multiplier:
+    value: 4
+  trafo_classifier.out_mode:
+    value: linear
+  transformer_classifier.result_column:
+    value: last
+  trafo_classifier.norm_att:
+    value: 0
+  simple_arithmetics.n_samples:
+    value: 100000
+  sweep_id_for_grid_search:
+    distribution: categorical
+    values:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+
