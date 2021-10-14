@@ -5,9 +5,9 @@ from collections import OrderedDict
 
 g = group(lib.get_runs(["ctl_baselines_rnn"]), ["ctl.reversed", "seq_classifier.rnn"])
 g.update(group(lib.get_runs(["ctl_baselines_transformer_11"], {"config.state_size": 128}), ["ctl.reversed", "transformer.variant"]))
-g.update({k+"_noabs": v for k, v in group(lib.get_runs(["ctl_tcf_no_absgate"]), ["ctl.reversed", "transformer.variant"]).items()})
-g.update({k+"_abs": v for k, v in group(lib.get_runs(["ctl_tcf"]), ["ctl.reversed", "transformer.variant"]).items()})
-g.update(group(lib.get_runs(["ctl_tcf_geometric"]), ["ctl.reversed", "transformer.variant"]))
+g.update({k+"_noabs": v for k, v in group(lib.get_runs(["ctl_ndr_no_absgate"]), ["ctl.reversed", "transformer.variant"]).items()})
+g.update({k+"_abs": v for k, v in group(lib.get_runs(["ctl_ndr"]), ["ctl.reversed", "transformer.variant"]).items()})
+g.update(group(lib.get_runs(["ctl_ndr_geometric"]), ["ctl.reversed", "transformer.variant"]))
 g.update(group(lib.get_runs(["ctl_baselines_transformer_geometric"]), ["ctl.reversed", "transformer.variant"]))
 print(g.keys())
 
@@ -23,10 +23,10 @@ model_list["seq_classifier.rnn_dnc"] = "DNC"
 model_list["asd"] = None
 model_list["transformer.variant_universal"] = "Transformer"
 model_list["transformer.variant_relative_universal"] = "\quad + rel"
-model_list["transformer.variant_tcf_residual_noabs"] = "\quad + rel + gate"
-model_list["transformer.variant_tcf_residual_abs"] = "\quad + abs/rel + gate"
+model_list["transformer.variant_ndr_residual_noabs"] = "\quad + rel + gate"
+model_list["transformer.variant_ndr_residual_abs"] = "\quad + abs/rel + gate"
 model_list["transformer.variant_geometric_transformer"] = "\quad + geom. att."
-model_list["transformer.variant_tcf_geometric"] = "\quad + geom. att. + gate (TCF)"
+model_list["transformer.variant_ndr_geometric"] = "\quad + geom. att. + gate (NDR)"
 
 
 siid = calc_stat(g, lambda k: k in {IID_KEY})

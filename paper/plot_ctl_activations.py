@@ -11,7 +11,7 @@ import math
 
 geometric = "user/project/runid"
 baseline = "user/project/runid"
-tcf = "user/project/runid"
+ndr = "user/project/runid"
 end_inds = [5, 10]
 
 
@@ -64,7 +64,7 @@ def plot_all_attentions(run, fname, nr=4, file="export/raw_plots/activations/tra
 cmap = 'viridis'
 
 api = wandb.Api()
-# run = api.run(tcf)
+# run = api.run(ndr)
 run = api.run(geometric)
 
 
@@ -222,11 +222,11 @@ def plot_all_gates(run, fname, nr=4):
 
 plot_all_gates(run, "all_gates_geometric.pdf")
 
-run = api.run(tcf)
+run = api.run(ndr)
 
-plot_all_attentions(run, "all_attention_tcf.pdf")
+plot_all_attentions(run, "all_attention_ndr.pdf")
 
-plot_all_gates(run, "all_attention_tcf.pdf")
+plot_all_gates(run, "all_attention_ndr.pdf")
 
 
 plot_all_attentions(api.run(baseline), "all_attention_baseline.pdf", nr=3, file="export/raw_plots/activations/trafo.layer.self_attn/attention_max.pth")

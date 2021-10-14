@@ -51,7 +51,7 @@ parameters:
     value: 0.1
   trafo_classifier.out_mode:
     value: linear
-  tcf.drop_gate:
+  ndr.drop_gate:
     value: 0.1
   simple_arithmetics.n_samples:
     value: 100000

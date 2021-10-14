@@ -57,14 +57,14 @@
 
 
         {
-            "name": "CTL Trafo - Classifier, tcf residual, REVERSED",
+            "name": "CTL Trafo - Classifier, ndr residual, REVERSED",
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/main.py",
             "console": "integratedTerminal",
-            "args": ["--name", "tcf_reversed", "--profile", "trafo_scan", "--task", "ctl_trafo_classifier", 
+            "args": ["--name", "ndr_reversed", "--profile", "trafo_scan", "--task", "ctl_trafo_classifier", 
                      "--log", "tb", "--keep_alive", "1", "-reset", "1", "-stop_after", "1000000",
-                     "--transformer.encoder_n_layers", "12",  "-transformer.variant", "tcf_residual",
+                     "--transformer.encoder_n_layers", "12",  "-transformer.variant", "ndr_residual",
                      "-lr", "0.0002", "-batch_size", "512", "-test_interval", "1000",
                     "-amp", "1", "-transformer_classifier.result_column", "last", "-state_size", "256",
                     "--ctl.reversed", "0", "-dropout", "0.5", "-wd", "0.01",
@@ -74,14 +74,14 @@
         },
 
         {
-            "name": "CTL Trafo - Classifier, tcf geometric, REVERSED",
+            "name": "CTL Trafo - Classifier, ndr geometric, REVERSED",
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/main.py",
             "console": "integratedTerminal",
-            "args": ["--name", "tcf_geom_reversed", "--profile", "trafo_scan", "--task", "ctl_trafo_classifier", 
+            "args": ["--name", "ndr_geom_reversed", "--profile", "trafo_scan", "--task", "ctl_trafo_classifier", 
                      "--log", "tb", "--keep_alive", "1", "-reset", "1", "-stop_after", "1000000",
-                     "--transformer.encoder_n_layers", "12",  "-transformer.variant", "tcf_geometric",
+                     "--transformer.encoder_n_layers", "12",  "-transformer.variant", "ndr_geometric",
                      "-lr", "0.0002", "-batch_size", "512", "-test_interval", "1000",
                     "-amp", "1", "-transformer_classifier.result_column", "last", "-state_size", "256",
                     "--ctl.reversed", "0", "-dropout", "0.5", "-wd", "0.01",
@@ -91,48 +91,48 @@
         },
 
         {
-            "name": "Listops tcf 2",
+            "name": "Listops ndr 2",
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/main.py",
             "console": "integratedTerminal",
-            "args": ["--name", "listops_tcf3", "--profile", "listops_trafo", "-amp", "1",
+            "args": ["--name", "listops_ndr3", "--profile", "listops_trafo", "-amp", "1",
                      "--log", "tb", "--keep_alive", "1", "-reset", "1", "-stop_after", "1000000",
-                    "-transformer.variant", "tcf_residual", "-test_batch_size", "128",
+                    "-transformer.variant", "ndr_residual", "-test_batch_size", "128",
                     "-transformer.encoder_n_layers", "10", "-max_length_per_batch", "100", "-state_size", "512",
                      "-lr", "2e-4", "-batch_size", "512" "-dropout", "0.5", "-wd", "0.001",
                      "-transformer.n_heads", "4", "-length_bucketed_sampling", "0", "-optimizer", "adamw",
                     "-test_batch_size", "32", "-test_interval", "1000", "-listops.variant", "big",
-                    "-tcf.scalar_gate", "0", "-max_length_per_batch", "none"]
+                    "-ndr.scalar_gate", "0", "-max_length_per_batch", "none"]
         },
 
         {
-            "name": "Simple aritchmetic tcf",
+            "name": "Simple aritchmetic ndr",
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/main.py",
             "console": "integratedTerminal",
-            "args": ["--name", "sa_tcf", "--profile", "listops_trafo", "-amp", "1", "-task", "simple_arithmetic_trafo",
+            "args": ["--name", "sa_ndr", "--profile", "listops_trafo", "-amp", "1", "-task", "simple_arithmetic_trafo",
                      "--log", "tb", "--keep_alive", "1", "-reset", "1", "-stop_after", "100000000",
-                    "-transformer.variant", "tcf_residual", "-test_batch_size", "128",
+                    "-transformer.variant", "ndr_residual", "-test_batch_size", "128",
                     "-transformer.encoder_n_layers", "10", "-max_length_per_batch", "100", "-state_size", "512",
                      "-lr", "2e-4", "-batch_size", "512" "-dropout", "0.5", "-wd", "0.001",
                      "-transformer.n_heads", "4", "-length_bucketed_sampling", "0", "-optimizer", "adamw",
                     "-test_batch_size", "512", "-test_interval", "1000",  "-max_length_per_batch", "none",
-                    "-tcf.scalar_gate", "0"]
+                    "-ndr.scalar_gate", "0"]
         },
 
 
        
         {
-            "name": "CTL Trafo - Classifier, TCF geometric, REVERSED",
+            "name": "CTL Trafo - Classifier, ndr geometric, REVERSED",
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/main.py",
             "console": "integratedTerminal",
-            "args": ["--name", "tcf_geometric_reversed", "--profile", "trafo_scan", "--task", "ctl_trafo_classifier", 
+            "args": ["--name", "ndr_geometric_reversed", "--profile", "trafo_scan", "--task", "ctl_trafo_classifier", 
                      "--log", "tb", "--keep_alive", "1", "-reset", "1", "-stop_after", "1000000",
-                     "--transformer.encoder_n_layers", "10",  "-transformer.variant", "tcf_geometric",
+                     "--transformer.encoder_n_layers", "10",  "-transformer.variant", "ndr_geometric",
                      "-lr", "0.0002", "-batch_size", "512", "-test_interval", "1000",
                     "-amp", "1", "-transformer_classifier.result_column", "last", "-state_size", "256",
                     "--ctl.reversed", "0", "-dropout", "0.5", "-wd", "0.001",
@@ -142,19 +142,19 @@
         },
 
         {
-            "name": "Simple aritchmetic TCF geometric",
+            "name": "Simple aritchmetic ndr geometric",
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/main.py",
             "console": "integratedTerminal",
-            "args": ["--name", "sa_tcf_geometric",   "--profile", "listops_trafo", "-amp", "1", "-task", "simple_arithmetic_trafo",
+            "args": ["--name", "sa_ndr_geometric",   "--profile", "listops_trafo", "-amp", "1", "-task", "simple_arithmetic_trafo",
                      "--log", "tb", "--keep_alive", "1", "-reset", "1", "-stop_after", "100000000",
-                    "-transformer.variant", "tcf_geometric", "-test_batch_size", "128",
+                    "-transformer.variant", "ndr_geometric", "-test_batch_size", "128",
                     "-transformer.encoder_n_layers", "10", "-max_length_per_batch", "100", "-state_size", "512",
                      "-lr", "2e-4", "-batch_size", "512" "-dropout", "0.5", "-wd", "0.001",
                      "-transformer.n_heads", "8", "-length_bucketed_sampling", "0", "-optimizer", "adamw",
                     "-test_batch_size", "512", "-test_interval", "1000",  "-max_length_per_batch", "none",
-                    "-tcf.scalar_gate", "0", "-embedding_init", "auto"]
+                    "-ndr.scalar_gate", "0", "-embedding_init", "auto"]
         },
 
        
@@ -166,12 +166,12 @@
             "console": "integratedTerminal",
             "args": ["--name", "listops_geo", "--profile", "listops_trafo", "-amp", "1",
                      "--log", "tb", "--keep_alive", "1", "-reset", "1", "-stop_after", "1000000",
-                    "-transformer.variant", "tcf_geometric", "-test_batch_size", "128",
+                    "-transformer.variant", "ndr_geometric", "-test_batch_size", "128",
                     "-transformer.encoder_n_layers", "10", "-max_length_per_batch", "100", "-state_size", "512",
                      "-lr", "2e-4", "-batch_size", "512" "-dropout", "0.5", "-wd", "0.001",
                      "-transformer.n_heads", "4", "-length_bucketed_sampling", "0", "-optimizer", "adamw",
                     "-test_batch_size", "32", "-test_interval", "1000", "-listops.variant", "big",
-                    "-tcf.scalar_gate", "0", "-max_length_per_batch", "none"]
+                    "-ndr.scalar_gate", "0", "-max_length_per_batch", "none"]
         },
 
       

@@ -20,7 +20,7 @@ parameters:
   transformer.encoder_n_layers:
     value: 14
   transformer.variant:
-    value: tcf_geometric
+    value: ndr_geometric
   transformer.n_heads:
     value: 1
   transformer_classifier.result_column:
@@ -55,7 +55,7 @@ parameters:
     value: 1
   amp:
     value: 1
-  tcf.drop_gate:
+  ndr.drop_gate:
     value: 0.1
   trafo_classifier.norm_att:
     value: 0

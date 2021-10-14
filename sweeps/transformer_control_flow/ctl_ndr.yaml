@@ -20,7 +20,7 @@ parameters:
   transformer.encoder_n_layers:
     value: 14
   transformer.variant:
-    value: tcf_residual
+    value: ndr_residual
   transformer.n_heads:
     value: 1
   transformer_classifier.result_column:
@@ -49,8 +49,6 @@ parameters:
     value: 5
   optimizer:
     value: adamw
-  tcf.abs_gate:
-    value: 0
   sweep_id_for_grid_search:
     distribution: categorical
     values:

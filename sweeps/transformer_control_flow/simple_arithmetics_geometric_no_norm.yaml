@@ -14,7 +14,7 @@ parameters:
   profile:
     value: listops_trafo
   transformer.variant:
-    value: tcf_geometric
+    value: ndr_geometric
   test_batch_size:
     value: 256
   transformer.encoder_n_layers:
@@ -49,9 +49,9 @@ parameters:
     value: direction
   transformer.attention_dropout:
     value: 0.1
-  tcf.scalar_gate:
+  ndr.scalar_gate:
     value: 0
-  tcf.drop_gate:
+  ndr.drop_gate:
     value: 0.1
   transformer.ff_multiplier:
     value: 4

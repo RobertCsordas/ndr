@@ -1,8 +1,8 @@
 import torch.nn
 from layers.transformer import TransformerEncoderWithLayer, UniversalTransformerEncoderWithLayer,\
                                RelativeTransformerEncoderLayer
-from layers.transformer.tcf import TCFResidual, UniversalTransformerRandomLayerEncoderWithLayer
-from layers.transformer.tcf_geometric import TCFGeometric
+from layers.transformer.ndr import NDRResidual, UniversalTransformerRandomLayerEncoderWithLayer
+from layers.transformer.ndr_geometric import NDRGeometric
 from layers.transformer.geometric_transformer import GeometricTransformerEncoderLayer
 from models import TransformerClassifierModel
 from interfaces import TransformerClassifierInterface
@@ -18,16 +18,16 @@ from typing import Dict, List, Tuple, Any
 def a(parser: framework.helpers.ArgumentParser):
     parser.add_argument("-transformer_classifier.result_column", default="first", choice=["first", "last"])
     parser.add_argument("-transformer_classifier.autoregressive", default=False)
-    parser.add_argument("-tcf.scalar_gate", default=False)
-    parser.add_argument("-tcf.abs_gate", default=True)
+    parser.add_argument("-ndr.scalar_gate", default=False)
+    parser.add_argument("-ndr.abs_gate", default=True)
     parser.add_argument("-debug_plot_interval", default="1", parser=parser.int_or_none_parser)
     parser.add_argument("-embedding_init", default="auto", choice=["auto", "kaiming", "xavier", "pytorch"])
     parser.add_argument("-trafo_classifier.out_mode", default="linear", choice=["linear", "tied", "attention"])
     parser.add_argument("-trafo_classifier.norm_att", default=True)
     parser.add_argument("-n_test_layers", default="none", parser=parser.int_or_none_parser)
-    parser.add_argument("-tcf.drop_gate", default=0.0)
-    parser.add_argument("-tcf.gate_size_multiplier", default=1)
-    parser.add_argument("-tcf.global_content_bias", default=True)
+    parser.add_argument("-ndr.drop_gate", default=0.0)
+    parser.add_argument("-ndr.gate_size_multiplier", default=1)
+    parser.add_argument("-ndr.global_content_bias", default=True)
 
 
 class TransformerClassifierMixin:
@@ -42,20 +42,20 @@ class TransformerClassifierMixin:
             "universal": (UniversalTransformerEncoderWithLayer(), {}),
             "relative": (TransformerEncoderWithLayer(RelativeTransformerEncoderLayer), rel_args),
             "relative_universal": (UniversalTransformerEncoderWithLayer(RelativeTransformerEncoderLayer), rel_args),
-            "tcf_residual": (UniversalTransformerEncoderWithLayer(TCFResidual), dict(
-                    p_gate_drop=self.helper.args.tcf.drop_gate,
-                    abs_gate = self.helper.args.tcf.abs_gate,
-                    scalar_gate = self.helper.args.tcf.scalar_gate,
+            "ndr_residual": (UniversalTransformerEncoderWithLayer(NDRResidual), dict(
+                    p_gate_drop=self.helper.args.ndr.drop_gate,
+                    abs_gate = self.helper.args.ndr.abs_gate,
+                    scalar_gate = self.helper.args.ndr.scalar_gate,
                     pos_embeddig=(lambda x, offset: x), embedding_init=default_init)),
             "geometric_transformer": (UniversalTransformerEncoderWithLayer(GeometricTransformerEncoderLayer),
                     dict(pos_embeddig=(lambda x, offset: x), embedding_init=default_init)),
-            "tcf_geometric": (UniversalTransformerRandomLayerEncoderWithLayer(TCFGeometric), dict(
+            "ndr_geometric": (UniversalTransformerRandomLayerEncoderWithLayer(NDRGeometric), dict(
                     n_extra=0, n_test = self.helper.args.n_test_layers,
-                    gate_size_multiplier= self.helper.args.tcf.gate_size_multiplier,
-                    global_content_bias=self.helper.args.tcf.global_content_bias,
+                    gate_size_multiplier= self.helper.args.ndr.gate_size_multiplier,
+                    global_content_bias=self.helper.args.ndr.global_content_bias,
                     normalize_score=self.helper.args.trafo_classifier.norm_att,
-                    scalar_gate = self.helper.args.tcf.scalar_gate,
-                    p_gate_drop=self.helper.args.tcf.drop_gate,
+                    scalar_gate = self.helper.args.ndr.scalar_gate,
+                    p_gate_drop=self.helper.args.ndr.drop_gate,
                     pos_embeddig=(lambda x, offset: x), embedding_init=default_init))
         }
 

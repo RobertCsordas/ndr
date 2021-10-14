@@ -37,7 +37,7 @@ def UniversalTransformerRandomLayerEncoderWithLayer(layer):
     return lambda *args, **kwargs: UniversalTransformerRandomLayerEncoder(layer, *args, **kwargs)
 
 
-class TCFResidual(RegularizedLayer, LayerWithVisualization):
+class NDRResidual(RegularizedLayer, LayerWithVisualization):
     def __init__(self, d_model: int, nhead: int, dropout: float, scalar_gate: bool = False,
                 abs_gate:bool = True, attention_dropout=0, p_gate_drop=0, **kwargs):
         super().__init__()

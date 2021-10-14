@@ -49,9 +49,9 @@ parameters:
     value: 1
   geometric.pos_encoding:
     value: direction
-  tcf.scalar_gate:
+  ndr.scalar_gate:
     value: 0
-  tcf.drop_gate:
+  ndr.drop_gate:
     value: 0.15
   grad_clip:
     value: 1

@@ -1,6 +1,6 @@
 {
   "wandb" : {
-    "project": "user/project"
+    "project": "user/ndr"
   },
 
   "setup": [

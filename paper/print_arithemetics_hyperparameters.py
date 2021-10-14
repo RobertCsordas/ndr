@@ -17,8 +17,8 @@ model_list["seq_classifier.rnn_lstm"] = "LSTM"
 model_list["asd"] = None
 model_list["transformer.variant_universal"] = "Transformer"
 model_list["transformer.variant_relative_universal"] = "\\quad + rel"
-model_list["transformer.variant_tcf_residual"] = "\\quad + abs/rel + gate"
-model_list["transformer.variant_tcf_geometric"] = "\\quad + geom. att. + gate"
+model_list["transformer.variant_ndr_residual"] = "\\quad + abs/rel + gate"
+model_list["transformer.variant_ndr_geometric"] = "\\quad + geom. att. + gate"
 
 def is_trafo(config):
     return config["task"] not in {"simple_arithmetics_rnn"}

@@ -17,7 +17,7 @@ g = {}
 g.update(group(lib.get_runs(["listops_big_lowlr"]), ["transformer.variant"]))
 g.update(group(lib.get_runs(["listops_big_reluni"]), ["transformer.variant"]))
 g.update(group(lib.get_runs(["listops_big_uni"]), ["transformer.variant"]))
-g.update(group(lib.get_runs(["listops_big_lowlr_tcf_daint"]), ["transformer.variant"]))
+g.update(group(lib.get_runs(["listops_big_lowlr_ndr_daint"]), ["transformer.variant"]))
 g.update(group(lib.get_runs(["listops_big_lstm"]), ["seq_classifier.rnn"]))
 print(g.keys())
 
@@ -26,8 +26,8 @@ model_list["seq_classifier.rnn_lstm"] = "LSTM"
 model_list["asd"] = None
 model_list["transformer.variant_universal"] = "Transformer"
 model_list["transformer.variant_relative_universal"] = "\\quad + rel"
-model_list["transformer.variant_tcf_residual"] = "\\quad + abs/rel + gate"
-model_list["transformer.variant_tcf_geometric"] = "\\quad + geom. att. + gate (TCF)"
+model_list["transformer.variant_ndr_residual"] = "\\quad + abs/rel + gate"
+model_list["transformer.variant_ndr_geometric"] = "\\quad + geom. att. + gate (NDR)"
 
 sgen = lib.CrossValidatedStats(GEN_KEY, VALID_KEY)(g)
 siid = calc_stat(g, lambda k: k in {IID_KEY})

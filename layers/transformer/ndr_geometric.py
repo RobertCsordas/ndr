@@ -8,7 +8,7 @@ import framework
 from .direction_sensitive_geometric import DirectionSensitiveGeometricAttentionMyInit, AttentionMask
 
 
-class TCFGeometric(RegularizedLayer, LayerWithVisualization):
+class NDRGeometric(RegularizedLayer, LayerWithVisualization):
     def __init__(self, d_model: int, nhead: int, dropout: float, scalar_gate: bool = False,
                  attention_dropout=0, p_gate_drop=0.05, dim_feedforward: Optional[int] = None, 
                  global_content_bias: bool = True, normalize_score=True, gate_size_multiplier=1, **kwargs):

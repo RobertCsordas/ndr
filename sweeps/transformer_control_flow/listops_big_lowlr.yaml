@@ -16,7 +16,7 @@ parameters:
   listops.variant:
     value: big
   transformer.variant:
-    value: tcf_geometric
+    value: ndr_geometric
   test_batch_size:
     value: 16
   transformer.encoder_n_layers:
@@ -49,9 +49,9 @@ parameters:
     value: 1
   geometric.pos_encoding:
     value: direction
-  tcf.scalar_gate:
+  ndr.scalar_gate:
     value: 0
-  tcf.drop_gate:
+  ndr.drop_gate:
     value: 0.05
   grad_clip:
     value: 1
