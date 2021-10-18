@@ -2,6 +2,8 @@
 
 The official repository for our paper "The Neural Data Router: Adaptive Control Flow in Transformers Improves Systematic Generalization".
 
+Paper: https://arxiv.org/abs/2110.07732
+
 Please note that this repository is a cleaned-up version of the internal research repository we use. In case you encounter any problems with it, please don't hesitate to contact me.
 
 ## Setup
@@ -66,3 +68,14 @@ Note that the plotting scripts work only with Weights and Biases.
 ### Reducing memory usage
 
 In case some tasks won't fit on your GPU, play around with "-max_length_per_batch <number>" argument. It can trade off memory usage/speed by slicing batches and executing them in multiple passes. Reduce it until the model fits.
+  
+# BibText
+```
+@article{csordas2021neural,
+      title={The Neural Data Router: Adaptive Control Flow in Transformers Improves Systematic Generalization}, 
+      author={R\'obert Csord\'as and Kazuki Irie and J\"urgen Schmidhuber},
+      journal={Preprint arXiv:2110.07732},
+      year={2021},
+      month={October}
+}
+```
