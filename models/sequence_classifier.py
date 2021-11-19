@@ -24,7 +24,6 @@ class SequenceClassifier(torch.nn.Module):
         # Input: [T, N]
         input, in_lengths = add_thinkig_steps(input, in_lengths, self.n_thinking_steps, self.think_token)
 
-        d = self.encoder(input, in_lengths).outputs
-        d = d.gather(0, in_lengths.view([1, in_lengths.shape[0], 1]).
-                     expand(-1, -1, d.shape[-1]) - 1).squeeze(0)
+        d = self.encoder(input, in_lengths)
+        d = self.encoder.get_run_summary_state(d, in_lengths)
         return self.classifier(d)

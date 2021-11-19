@@ -24,6 +24,7 @@ parameters:
   seq_classifier.rnn:
     values: 
       - lstm
+      - bilstm
       - dnc
   n_layers:
     value: 1

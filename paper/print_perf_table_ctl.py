@@ -66,6 +66,7 @@ if __name__ == "__main__":
 
     model_list = OrderedDict()
     model_list["seq_classifier.rnn_lstm"] = "LSTM"
+    model_list["seq_classifier.rnn_bilstm"] = "Bidirectional LSTM"
     model_list["seq_classifier.rnn_dnc"] = "DNC"
     model_list["asd"] = None
     model_list["transformer.variant_universal"] = "Transformer"

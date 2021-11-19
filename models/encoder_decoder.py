@@ -32,7 +32,7 @@ class EncoderState:
 
 class Encoder(torch.nn.Module):
     def __init__(self, vocabulary_size: int, hidden_size: int, n_layers: int, embedding_size: int, dropout: float,
-                lstm: torch.nn.Module):
+                 lstm: torch.nn.Module):
         super().__init__()
 
         self.vocabulary_size = vocabulary_size
@@ -57,3 +57,19 @@ class Encoder(torch.nn.Module):
         inputs = add_eos(inputs, lengths, self.vocabulary_size)
         return EncoderState(*self.run(inputs, lengths + 1))
 
+    def get_run_summary_state(self, state: EncoderState, lengths: torch.Tensor) -> torch.Tensor:
+        d = state.outputs
+        d = d.gather(0, lengths.view([1, lengths.shape[0], 1]).expand(-1, -1, d.shape[-1]) - 1).squeeze(0)
+        return d
+
+
+class BidirectionalLSTMEncoder(Encoder):
+    def __init__(self, vocabulary_size: int, hidden_size: int, n_layers: int, embedding_size: int, dropout: float,
+                 lstm: torch.nn.Module):
+        assert hidden_size % 2 == 0
+        lstmb = lambda input_size, hidden_size, *args, **kwargs: lstm(input_size, hidden_size // 2, *args, **kwargs, \
+                                                                      bidirectional=True)
+        super().__init__(vocabulary_size, hidden_size, n_layers, embedding_size, dropout, lstmb)
+
+    def get_run_summary_state(self, state: EncoderState, lengths: torch.Tensor) -> torch.Tensor:
+        return state.state[0].view(2, -1, *state.state[0].shape[1:])[:, -1].permute(1, 0, 2).flatten(1)

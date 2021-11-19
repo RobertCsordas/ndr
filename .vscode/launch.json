@@ -190,6 +190,18 @@
         },      
 
         {
+            "name": "CTL BiLSTM classifier",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/main.py",
+            "console": "integratedTerminal",
+            "args": ["--name", "ctl_bilstm", "--profile", "scan", "--task", "ctl_rnn_classifier", "--log", "tb",
+                     "--keep_alive", "1", "-reset", "1", "-stop_after", "1000000", "-test_interval", "1000",
+                     "--ctl.reversed", "1", "-seq_classifier.rnn", "bilstm", "-amp", "0", "-n_layers", "1",
+                     "-thinking_steps", "0"]
+        },
+
+        {
             "type": "python",
             "request": "launch",
             "name": "Debug File",

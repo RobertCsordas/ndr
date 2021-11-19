@@ -23,6 +23,7 @@ print(g.keys())
 
 model_list = OrderedDict()
 model_list["seq_classifier.rnn_lstm"] = "LSTM"
+model_list["seq_classifier.rnn_bilstm"] = "Bidirectional LSTM"
 model_list["asd"] = None
 model_list["transformer.variant_universal"] = "Transformer"
 model_list["transformer.variant_relative_universal"] = "\\quad + rel"

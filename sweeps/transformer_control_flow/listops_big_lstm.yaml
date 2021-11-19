@@ -18,7 +18,9 @@ parameters:
   listops.variant:
     value: big
   seq_classifier.rnn:
-    value: lstm
+    values:
+      - lstm
+      - bilstm
   test_batch_size:
     value: 16
   n_layers:
