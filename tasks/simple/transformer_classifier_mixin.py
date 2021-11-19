@@ -4,6 +4,7 @@ from layers.transformer import TransformerEncoderWithLayer, UniversalTransformer
 from layers.transformer.ndr import NDRResidual, UniversalTransformerRandomLayerEncoderWithLayer
 from layers.transformer.ndr_geometric import NDRGeometric
 from layers.transformer.geometric_transformer import GeometricTransformerEncoderLayer
+from layers.transformer.act_transformer import ACTTransformerEncoderWithLayer, ACTTransformerEncoder
 from models import TransformerClassifierModel
 from interfaces import TransformerClassifierInterface
 from .. import args
@@ -28,11 +29,13 @@ def a(parser: framework.helpers.ArgumentParser):
     parser.add_argument("-ndr.drop_gate", default=0.0)
     parser.add_argument("-ndr.gate_size_multiplier", default=1)
     parser.add_argument("-ndr.global_content_bias", default=True)
+    parser.add_argument("-act.loss_weight", default=0.001)
+    parser.add_argument("-act.ut_variant", default=False)
 
 
 class TransformerClassifierMixin:
     VIS_DATASET_FILTER = None
-    
+
     def create_model(self) -> torch.nn.Module:
         einit = None if self.helper.args.embedding_init == "auto" else self.helper.args.embedding_init
         rel_args = dict(pos_embeddig=(lambda x, offset: x), embedding_init=einit or "xavier")
@@ -56,7 +59,16 @@ class TransformerClassifierMixin:
                     normalize_score=self.helper.args.trafo_classifier.norm_att,
                     scalar_gate = self.helper.args.ndr.scalar_gate,
                     p_gate_drop=self.helper.args.ndr.drop_gate,
-                    pos_embeddig=(lambda x, offset: x), embedding_init=default_init))
+                    pos_embeddig=(lambda x, offset: x), embedding_init=default_init)),
+            "act_universal": (functools.partial(ACTTransformerEncoderWithLayer(), threshold=0.99, 
+                    act_loss_weight=self.helper.args.act.loss_weight, ut_variant=self.helper.args.act.ut_variant), {}),
+            "act_relative_universal": (functools.partial(ACTTransformerEncoderWithLayer(RelativeTransformerEncoderLayer),
+                    threshold=0.99, act_loss_weight=self.helper.args.act.loss_weight,
+                    ut_variant=self.helper.args.act.ut_variant), rel_args),
+            "act_relative_universal_geometric": (functools.partial(
+                    ACTTransformerEncoderWithLayer(GeometricTransformerEncoderLayer),
+                    threshold=0.99, act_loss_weight=self.helper.args.act.loss_weight,
+                    ut_variant=self.helper.args.act.ut_variant), rel_args)
         }
 
         constructor, args = trafos[self.helper.args.transformer.variant]
@@ -127,6 +139,22 @@ class TransformerClassifierMixin:
             self.validation_started_on = None
 
         return res, plots
+
+    def validate(self) -> Dict[str, Any]:
+        is_act = isinstance(self.model.trafo, ACTTransformerEncoder)
+
+        if is_act:
+            # Reset stats, just in case
+            self.model.trafo.get_len_stats()
+
+        res = super().validate()
+
+        if is_act:
+            stats = self.model.trafo.get_len_stats()
+            for i, pt in stats.items():
+                res[f"ponder_times/len_{i}"] = pt
+
+        return res
 
     def finish(self):
         print("Saving raw plots")

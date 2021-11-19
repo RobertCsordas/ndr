@@ -174,7 +174,20 @@
                     "-ndr.scalar_gate", "0", "-max_length_per_batch", "none"]
         },
 
-      
+        {
+            "name": "CTL Trafo - ACT reluni",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/main.py",
+            "console": "integratedTerminal",
+            "args": ["--name", "ctl_trafo_act_reluni", "--profile", "trafo_scan", "--task", "ctl_trafo_classifier",
+                    "--log", "tb", "--keep_alive", "1", "-reset", "1", "-stop_after", "1000000",
+                    "--transformer.encoder_n_layers", "14",  "-transformer.variant", "act_relative_universal",
+                    "-transformer.n_heads", "1", "-lr", "2e-4", "-batch_size", "512", "-test_interval", "1000",
+                  "-amp", "1", "-transformer_classifier.result_column", "last", "-wd", "0.01", 
+                  "-ctl.n_more_depth_valid", "3", "-ctl.n_more_depth", "5", "-optimizer", "adamw",
+                  "-state_size", "256", "-dropout", "0.5"]
+        },      
 
         {
             "type": "python",
